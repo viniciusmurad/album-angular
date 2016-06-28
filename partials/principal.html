@@ -1,0 +1,23 @@
+<div class="jumbotron">
+    <h1 class="text-center">Álbum angular</h1>
+</div>
+<p class="alert alert-info" ng-show="mensagem.length">{{mensagem}}</p>
+<div class="row">
+    <div class="col-md-12">
+        <form>
+        	<div class="input-group">
+	        	<span class="input-group-btn">
+	          		<a class="btn btn-primary" href="fotos/new">Nova Foto</a>
+	        	</span>
+	            <input class="form-control" placeholder="Pesquisar.." ng-model="filtro" ng-model-options="{debounce: 500}">
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter:filtro" titulo="{{foto.titulo}}">
+        <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">  
+        <a href="/fotos/edit/{{foto._id}}" class="btn btn-primary btn-block">Editar</a>
+        <button ng-click="excluir(foto)" class="btn btn-danger btn-block">Remover</button>
+    </painel> 
+</div>
