@@ -1,26 +1,42 @@
 angular.module('diretivas', [])
-	.directive('painel', painel)
-    .directive('minhaFoto', minhaFoto);
-	
+	.directive('painel', function() {
 
-function painel() {
-    return {
-      'restric': 'AE'
-      , 'scope': {
-        'titulo': '@'
-      }
-      , 'templateUrl': 'js/directives/panel.html'
-      , 'transclude': true
-    };
- }
+	  var ddo = {};
 
-function minhaFoto() {
-    return {
-      'restrict': 'E'
-      , 'scope': {
-        'titulo': '@'
-        , 'url': '@'
-      }
-      , 'templateUrl': 'js/directives/minha-foto.html',
-    };
- }
+	  ddo.restrict = "AE";
+	  ddo.transclude = true;
+
+	  ddo.scope = {
+	    titulo: '@'
+	  };
+
+	  ddo.templateUrl = 'js/directives/panel.html';
+
+	  return ddo;
+	})
+	.directive('minhaFoto', function () {
+	  var ddo = {};
+
+	  ddo.restrict = "AE";
+	  ddo.scope = {
+	    url: '@',
+	    titulo: '@'
+	  }
+
+	  ddo.templateUrl = 'js/directives/minha-foto.html';
+
+	  return ddo;
+	})
+	.directive('meuBotaoDanger', function () {
+	  var ddo = {};
+
+	  ddo.restrict = "E";
+	  ddo.scope = {
+	    nome: '@',
+	    acao: '&'
+	  };
+
+	  ddo.template = '<button class="btn btn-danger btn-block" ng-click="acao(foto)">{{nome}}</button>';
+
+	  return ddo;
+})
