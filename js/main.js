@@ -1,4 +1,4 @@
-angular.module('albumapp', ['diretivas','ngRoute'])
+angular.module('albumapp', ['diretivas','ngRoute', 'servicos'])
  .config(function($routeProvider, $locationProvider) {
 
  	$locationProvider.html5Mode(true);

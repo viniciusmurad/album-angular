@@ -1,12 +1,13 @@
-angular.module('albumapp').controller('FotoCtrl', function ($scope, $http, $routeParams) {
+angular.module('albumapp').controller('FotoCtrl', function ($scope, $routeParams, resFoto) {
 	
 	$scope.fotos = {};
 	$scope.mensagem = '';
 	
+	
 	if($routeParams.fotoId) {
-		$http.get('v1/fotos/' + $routeParams.fotoId).success(function(foto) {
+		resFoto.get({fotoId : $routeParams.fotoId}, function(foto) {
 			$scope.foto = foto;
-		}).error(function(erro) {
+		}, function(erro) {
 			console.log(erro);
 		})
 	}
@@ -14,18 +15,20 @@ angular.module('albumapp').controller('FotoCtrl', function ($scope, $http, $rout
 	$scope.submeter = function () {
 		if ($scope.formulario.$valid) {
 			if($scope.foto._id) {
-				$http.put('v1/fotos/' + $scope.foto._id, $scope.foto).success(function(){
+				resFoto.atualizar({fotoId : $scope.foto._id}, $scope.foto, function() {
 					$scope.mensagem = 'Foto alterada';
-				}).error(function(erro){
-					console.log(erro)
-				})
-			} else {
-				$http.post('v1/fotos', $scope.foto).success(function() {
-					$scope.foto = {};
-					$scope.mensagem = 'Foto cadastrada';
-				}).error(function(erro) {
-					$scope.mensagem = 'Não foi possível cadastrar';
+				}, function (erro) {
 					console.log(erro);
+					$scope.mensagem = 'Não foi possível cadastrar';
+				});
+				
+			} else {
+				resFoto.save($scope.foto, function() {
+					$scope.foto = {};
+					$scope.mensagem = 'Foto incluída';
+				}, function(erro) {
+					console.log(erro);
+					$scope.mensagem = 'Não foi possível cadastrar';
 				})
 			}
 		}

@@ -1,25 +1,22 @@
-angular.module('albumapp').controller('FotosCtrl', function ($scope, $http) {
+angular.module('albumapp').controller('FotosCtrl', function ($scope, resFoto) {
 	
 	$scope.fotos = [];
 	$scope.filtro = '';
 	$scope.mensagem = '';
 
-	$http.get('v1/fotos').success(function(fotos) {
+	resFoto.query(function(fotos) {
 		$scope.fotos = fotos;
-	}).error(function(erro) {
+	}, function(erro) {
 		console.log(erro);
-	})
+	});
 
-	$scope.excluir = function (foto) {
-		$http.delete('v1/fotos/' + foto._id).success(function () {
+	$scope.excluir = function(foto) {
+		resFoto.delete({fotoId: foto._id}, function() {
 			var indexFoto = $scope.fotos.indexOf(foto);
 			$scope.fotos.splice(indexFoto, 1);
 			$scope.mensagem = 'Foto ' + foto.titulo + ' foi removida';
-
-		}).error(function(erro) {
+		}, function(erro) {
 			console.log(erro);
-		})
+		});
 	}
-
-	
 })
