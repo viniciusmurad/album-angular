@@ -17,6 +17,7 @@ angular.module('albumapp').controller('FotoCtrl', function ($scope, $routeParams
 			cadastrarFotos.cadastrar($scope.foto).then(function(dados) {
 				$scope.mensagem = dados.mensagem;
 				if(dados.inclusao) $scope.foto = {};
+				
 			}).catch(function(dados) {
 				$scope.mensagem = dados.mensagem;
 			})

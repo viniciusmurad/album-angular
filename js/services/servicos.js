@@ -6,13 +6,15 @@ angular.module('servicos', ['ngResource'])
 		}
 	})
 })
-.factory('cadastrarFotos', function(resFoto, $q) {
+.factory('cadastrarFotos', function(resFoto, $q, $rootScope) {
 	var servico = {};
+	var evento = 'cadastrada'
 
 	servico.cadastrar = function(foto) {
 		return $q(function(resolve, reject) {
 			if(foto._id) {
 				resFoto.atualizar({fotoId: foto._id}, foto, function() {
+					$rootScope.$broadcast(evento);
 					resolve({
 						mensagem: 'Foto atualizada',
 						incluir: false
@@ -25,6 +27,7 @@ angular.module('servicos', ['ngResource'])
 				})
 			} else {
 				resFoto.save(foto, function(){
+					$rootScope.$broadcast(evento);
 					resolve({
 						mensagem: 'Foto incluída',
 						incluir: true
