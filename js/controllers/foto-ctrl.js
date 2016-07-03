@@ -3,7 +3,8 @@ angular.module('albumapp').controller('FotoCtrl', function ($scope, $routeParams
 	$scope.fotos = {};
 	$scope.mensagem = '';
 	
-	
+
+	// Requisição da imagem pelo id
 	if($routeParams.fotoId) {
 		resFoto.get({fotoId : $routeParams.fotoId}, function(foto) {
 			$scope.foto = foto;
@@ -12,6 +13,7 @@ angular.module('albumapp').controller('FotoCtrl', function ($scope, $routeParams
 		})
 	}
 
+	// Submeter imagem
 	$scope.submeter = function () {
 		if ($scope.formulario.$valid) {
 			cadastrarFotos.cadastrar($scope.foto).then(function(dados) {

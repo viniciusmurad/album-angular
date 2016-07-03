@@ -4,12 +4,14 @@ angular.module('albumapp').controller('FotosCtrl', function ($scope, resFoto) {
 	$scope.filtro = '';
 	$scope.mensagem = '';
 
+	// Buscar imagem
 	resFoto.query(function(fotos) {
 		$scope.fotos = fotos;
 	}, function(erro) {
 		console.log(erro);
 	});
 
+	// Excluir imagens
 	$scope.excluir = function(foto) {
 		resFoto.delete({fotoId: foto._id}, function() {
 			var indexFoto = $scope.fotos.indexOf(foto);
