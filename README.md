@@ -8,7 +8,7 @@ Install dependencies using:
 
 ``` bower install ```
 
-Install http-server using:
+Install http-server:
 
 ``` npm install http-server ```
 
