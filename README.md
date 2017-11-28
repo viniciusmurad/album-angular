@@ -1,17 +1,17 @@
-# album-angular
+# Installing
 
 Clone the project using
 
-``` git clone https://github.com/viniciusmurad/album-angular.git ```
+```
+git clone https://github.com/viniciusmurad/PZ_Challenge_Web.git
+```
 
 Install dependencies using:
 
-``` bower install ```
+```
+npm install
+```
 
-Install http-server:
-
-``` npm install http-server ```
-
-Run server using:
-
-``` http-server ```
+```
+bower install
+```
