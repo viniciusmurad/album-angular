@@ -1,4 +1,4 @@
-# Installing
+# Instructions to run
 
 Clone the project using
 
